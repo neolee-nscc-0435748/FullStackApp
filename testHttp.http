@@ -1,0 +1,100 @@
+### Get all documents
+GET http://localhost:3000/api/homeworks
+
+### Get one document by Id
+GET http://localhost:3000/api/homeworks/5f6ff3d35938396a2ab1165b
+
+### Get one document by Id
+GET http://localhost:3000/api/homeworks/5f867574a92be20758155196
+
+### Create new document
+POST http://localhost:3000/api/homeworks
+Content-Type: application/json
+
+{
+  "subject": {
+    "teacher_name": {
+      "first": "New",
+      "last": "New"
+    },
+    "title": "New"
+  },
+  "semester": {
+    "year": 2779,
+    "name": "New"
+  },
+  "school": {
+    "name": "New",
+    "address": "New",
+    "logo": "https://www.nscc.ca/img/designelements/header/new.png"
+  },
+  "title": "New",
+  "score": 100,
+  "due_date": "2020-08-11T21:06:42.000Z",
+  "submit": [
+    {
+      "seq_no": 1,
+      "title": "New",
+      "text_content": "New1."
+    },
+    {
+      "seq_no": 2,
+      "title": "New",
+      "text_content": "New2."
+    },
+    {
+      "seq_no": 3,
+      "title": "New",
+      "text_content": "New3."
+    }
+  ],
+  "progress": 0
+}
+
+### Update an existing document by Id
+PUT http://localhost:3000/api/homeworks/5f867574a92be20758155196
+Content-Type: application/json
+
+{
+  "subject": {
+    "teacher_name": {
+      "first": "ReplacedByPut",
+      "last": "ReplacedByPut"
+    },
+    "title": "ReplacedByPut"
+  },
+  "semester": {
+    "year": 2779,
+    "name": "ReplacedByPut"
+  },
+  "school": {
+    "name": "ReplacedByPut",
+    "address": "ReplacedByPut",
+    "logo": "https://www.nscc.ca/img/designelements/header/ReplacedByPut.png"
+  },
+  "title": "ReplacedByPut",
+  "score": 100,
+  "due_date": "2020-08-11T21:06:42.000Z",
+  "submit": [
+    {
+      "seq_no": 1,
+      "title": "ReplacedByPut",
+      "text_content": "New1."
+    },
+    {
+      "seq_no": 2,
+      "title": "ReplacedByPut",
+      "text_content": "New2."
+    },
+    {
+      "seq_no": 3,
+      "title": "ReplacedByPut",
+      "text_content": "New3."
+    }
+  ],
+  "progress": 0
+}
+
+### Delete an existing document by Id
+DELETE http://localhost:3000/api/homeworks/5f867574a92be20758155196
+

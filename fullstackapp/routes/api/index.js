@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var homeworkRouter = require('./homeworks')
+var homeworksRouter = require('./homeworks')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+  res.send('This is the API\'s root');
 });
 
 // add another router
-router.use('/homeworks', homeworkRouter);
+router.use('/homeworks', homeworksRouter);
 
 module.exports = router;

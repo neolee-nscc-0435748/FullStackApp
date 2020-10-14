@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,11 +6,23 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-//connect mongodb to homework collection
-mongoose.connect('mongodb://localhost/songdb', {useNewUrlParser: true, useUnifiedTopology: true});
+//set environment variables
+const mongodbConn = process.env.MONGOOSE;
+const baseRoute = process.env.BASEROUTE;
+const apiRoute = process.env.APIROUTE;
 
-var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/api/index')
+//connect mongodb to homework collection
+mongoose.connect(mongodbConn, {useNewUrlParser: true, useUnifiedTopology: true});
+//check a connection status
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('Mongodb is connected!');
+});
+
+var indexRouter = require(baseRoute);
+var apiRouter = require(apiRoute)
 
 var app = express();
 
