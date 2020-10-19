@@ -1,14 +1,6 @@
-/*
-  References
-   - https://stackoverflow.com/questions/16881832/mongoose-adds-id-to-all-nested-objects : for root only object id
-   - https://www.npmjs.com/package/bson-objectid : for object id generate
- */
-
-var express = require('express');
-var router = express.Router();
-var ObjectID = require('bson-objectid');
-var Homework = require('../../models/modelHomeworks');
-var validator = require('../../modules/validations');
+const express = require('express');
+const router = express.Router();
+const Homework = require('../../models/modelHomeworks');
 
 //Get all documents
 router.get('/', function (req, res) {
@@ -28,7 +20,7 @@ router.get('/:id', function (req, res) {
 
   // return one homework data from mongo
   Homework.findById(req.params.id, (err, homework) => {
-    if (err) return res.status(404).send(`Could not found with Id: ${req.params.id}`);
+    if (!homework) return res.status(404).send(`Could not found with Id: ${req.params.id}`);
 
     return res.status(200).send(homework);
   });
@@ -36,50 +28,44 @@ router.get('/:id', function (req, res) {
 
 //Create new document
 router.post('/', (req, res) => {
+  //create a homework object
+  const newHomework = new Homework(req.body);
   //check validations
-  const error = validator(req.body)
-  if (error != undefined) {
-    const {details} = error;
-    const message = details.map(i => i.message);
-
+  let valRet = newHomework.validateSync();
+  if(valRet) {
     return res.status(422).json({
       status: "error",
-      details: message
+      details: valRet.message
     });
   }
-
-  // create a song object ba
-  const newHomework = new Homework(req.body);
-  newHomework._id = ObjectID(); //generate object id
+  //insert new homework
   newHomework.save((err, homework) => {
     if (err) {
       console.log(err);
       return res.status(400).send();
     }
 
-    res.status(201).send(homework);
+    return res.status(201).send(homework);
   });
 });
 
 //Update an existing document by Id
 router.put('/:id', (req, res) => {
   console.log(`Update an existing document by Id: ${req.params.id}`);
-
+  //update options
+  const options = {
+    new: true,
+    runValidators: true
+  };
   // return one homework data from mongo
-  Homework.findByIdAndUpdate(req.params.id, req.body,(err, homework) => {
-    if (err) return res.status(404).send(`Could not found with Id: ${req.params.id}`);
-
-    //check validations
-    const error = validator(req.body)
-    if (error != undefined) {
-      const {details} = error;
-      const message = details.map(i => i.message);
-
+  Homework.findByIdAndUpdate(req.params.id, req.body, options, (err, homework) => {
+    if(err) {
       return res.status(422).json({
         status: "error",
-        details: message
+        details: err.message
       });
     }
+    if (!homework) return res.status(404).send(`Could not found with Id: ${req.params.id}`);
 
     return res.status(204).send(homework);
   });
@@ -91,7 +77,7 @@ router.delete('/:id', (req, res) => {
 
   // return one homework data from mongo
   Homework.findByIdAndDelete(req.params.id, (err, homework) => {
-    if (err) return res.status(404).send(`Could not found with Id: ${req.params.id}`);
+    if (!homework) return res.status(404).send(`Could not found with Id: ${req.params.id}`);
 
     return res.status(204).send();
   });

@@ -1,11 +1,13 @@
+########################################################################################################################
+### For homeworks
 ### Get all documents
 GET http://localhost:3000/api/homeworks
 
 ### Get one document by Id
-GET http://localhost:3000/api/homeworks/5f6ff3d35938396a2ab1165b
+GET http://localhost:3000/api/homeworks/5f6ff3d34566190b10831348
 
-### Get one document by Id
-GET http://localhost:3000/api/homeworks/5f867574a92be20758155196
+### Get one document by Id (created by me)
+GET http://localhost:3000/api/homeworks/5f8b8f7d71cc4e23e4f82c64
 
 ### Create new document
 POST http://localhost:3000/api/homeworks
@@ -15,7 +17,7 @@ Content-Type: application/json
   "subject": {
     "teacher_name": {
       "first": "New",
-      "last": "New"
+      "last": "Newpppppppp"
     },
     "title": "New"
   },
@@ -52,7 +54,7 @@ Content-Type: application/json
 }
 
 ### Update an existing document by Id
-PUT http://localhost:3000/api/homeworks/5f867574a92be20758155196
+PUT http://localhost:3000/api/homeworks/5f8b8f7d71cc4e23e4f82c64
 Content-Type: application/json
 
 {
@@ -64,7 +66,7 @@ Content-Type: application/json
     "title": "ReplacedByPut"
   },
   "semester": {
-    "year": 2779,
+    "year": 2777,
     "name": "ReplacedByPut"
   },
   "school": {
@@ -96,5 +98,26 @@ Content-Type: application/json
 }
 
 ### Delete an existing document by Id
-DELETE http://localhost:3000/api/homeworks/5f867574a92be20758155196
+DELETE http://localhost:3000/api/homeworks/5f8bc84d0fca612af49d278e
 
+########################################################################################################################
+### For users
+### Create new document
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+  "firstName": "Newwwwwwwwwwwwttweeeeefffffffffttwww",
+  "lastName": "Newlasthhhhhhhhhhhht",
+  "email": "test1@gmail.com",
+  "password": "password123"
+}
+
+### login with email and password
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
+  "password": "password123"
+}
