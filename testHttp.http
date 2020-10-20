@@ -119,5 +119,113 @@ Content-Type: application/json
 
 {
   "email": "test@gmail.com",
+  "password": "word123"
+}
+
+########################################################################################################################
+### For JWT verification
+### login with email and password
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
   "password": "password123"
 }
+
+### Create new document
+POST http://localhost:3000/api/homeworks
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciLCJhc3NpZ25tZW50IjoiQXNzaWdubWVudCAyIFBoYXNlIDIiLCJzdHVkZW50X25hbWUiOiJOZW8gTGVlIiwiZXhwIjoxNjAzMjI0NTg1LCJpYXQiOjE2MDMyMjA5ODV9.2QnehAmPqiEWt039Bn9hkJ7S2zh-H-chrF2pQ9NbDDo
+
+
+{
+  "subject": {
+    "teacher_name": {
+      "first": "NewJWT",
+      "last": "NewJWTpppppppp"
+    },
+    "title": "NewJWT"
+  },
+  "semester": {
+    "year": 2779,
+    "name": "NewJWT"
+  },
+  "school": {
+    "name": "NewJWT",
+    "address": "NewJWT",
+    "logo": "https://www.nscc.ca/img/designelements/header/NewJWT.png"
+  },
+  "title": "NewJWT",
+  "score": 100,
+  "due_date": "2020-08-11T21:06:42.000Z",
+  "submit": [
+    {
+      "seq_no": 1,
+      "title": "NewJWT",
+      "text_content": "NewJWT1."
+    },
+    {
+      "seq_no": 2,
+      "title": "NewJWT",
+      "text_content": "NewJWT2."
+    },
+    {
+      "seq_no": 3,
+      "title": "NewJWT",
+      "text_content": "NewJWT3."
+    }
+  ],
+  "progress": 0
+}
+
+### Update an existing document by Id
+PUT http://localhost:3000/api/homeworks/5f8f3622b7241047d066eaf0
+Content-Type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciLCJhc3NpZ25tZW50IjoiQXNzaWdubWVudCAyIFBoYXNlIDIiLCJzdHVkZW50X25hbWUiOiJOZW8gTGVlIiwiZXhwIjoxNjAzMjI0NTg1LCJpYXQiOjE2MDMyMjA5ODV9.2QnehAmPqiEWt039Bn9hkJ7S2zh-H-chrF2pQ9NbDDo
+
+
+
+{
+  "subject": {
+    "teacher_name": {
+      "first": "ReplacedJWTByPut",
+      "last": "ReplacedJWTByPut"
+    },
+    "title": "ReplacedJWTByPut"
+  },
+  "semester": {
+    "year": 2777,
+    "name": "ReplacedJWTByPut"
+  },
+  "school": {
+    "name": "ReplacedJWTByPut",
+    "address": "ReplacedJWTByPut",
+    "logo": "https://www.nscc.ca/img/designelements/header/ReplacedJWTByPut.png"
+  },
+  "title": "ReplacedJWTByPut",
+  "score": 100,
+  "due_date": "2020-08-11T21:06:42.000Z",
+  "submit": [
+    {
+      "seq_no": 1,
+      "title": "ReplacedJWTByPut",
+      "text_content": "New1."
+    },
+    {
+      "seq_no": 2,
+      "title": "ReplacedJWTByPut",
+      "text_content": "New2."
+    },
+    {
+      "seq_no": 3,
+      "title": "ReplacedJWTByPut",
+      "text_content": "New3."
+    }
+  ],
+  "progress": 0
+}
+
+### Delete an existing document by Id
+DELETE http://localhost:3000/api/homeworks/5f8f3622b7241047d066eaf0
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciLCJhc3NpZ25tZW50IjoiQXNzaWdubWVudCAyIFBoYXNlIDIiLCJzdHVkZW50X25hbWUiOiJOZW8gTGVlIiwiZXhwIjoxNjAzMjI0NTg1LCJpYXQiOjE2MDMyMjA5ODV9.2QnehAmPqiEWt039Bn9hkJ7S2zh-H-chrF2pQ9NbDDo

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Homework = require('../../models/modelHomeworks');
+const validationJWT = require('../../Middleware/validationJWT');
 
 //Get all documents
 router.get('/', function (req, res) {
@@ -27,7 +28,7 @@ router.get('/:id', function (req, res) {
 });
 
 //Create new document
-router.post('/', (req, res) => {
+router.post('/', validationJWT, (req, res) => {
   //create a homework object
   const newHomework = new Homework(req.body);
   //check validations
@@ -50,7 +51,7 @@ router.post('/', (req, res) => {
 });
 
 //Update an existing document by Id
-router.put('/:id', (req, res) => {
+router.put('/:id', validationJWT, (req, res) => {
   console.log(`Update an existing document by Id: ${req.params.id}`);
   //update options
   const options = {
@@ -72,7 +73,7 @@ router.put('/:id', (req, res) => {
 });
 
 //Delete an existing document by Id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validationJWT, (req, res) => {
   console.log(`Delete an existing document by Id: ${req.params.id}`);
 
   // return one homework data from mongo
