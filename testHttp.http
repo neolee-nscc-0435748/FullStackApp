@@ -1,7 +1,7 @@
 ########################################################################################################################
 ### For homeworks
 ### Get all documents
-GET http://localhost:3000/api/homeworks
+GET http://localhost:5000/api/homeworks
 
 ### Get one document by Id
 GET http://localhost:3000/api/homeworks/5f6ff3d34566190b10831348
