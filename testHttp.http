@@ -103,18 +103,18 @@ DELETE http://localhost:3000/api/homeworks/5f8bc84d0fca612af49d278e
 ########################################################################################################################
 ### For users
 ### Create new document
-POST http://localhost:3000/api/users/register
+POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
-  "firstName": "Newwwwwwwwwwwwttweeeeefffffffffttwww",
-  "lastName": "Newlasthhhhhhhhhhhht",
-  "email": "test1@gmail.com",
+  "firstName": "Newfirst2",
+  "lastName": "Newlast2",
+  "email": "test2@gmail.com",
   "password": "password123"
 }
 
 ### login with email and password
-POST http://localhost:3000/api/users/login
+POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
@@ -125,7 +125,7 @@ Content-Type: application/json
 ########################################################################################################################
 ### For JWT verification
 ### login with email and password
-POST http://localhost:3000/api/users/login
+POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {

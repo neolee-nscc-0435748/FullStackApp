@@ -32,10 +32,19 @@ router.post('/register', (req, res) => {
           });
         }
 
-        return res.status(201).json({
-          email: user.email,
-          _id: user._id
-        });
+        //generator JWT
+        const token = createJWT();
+
+        return res
+          .header({
+          'Access-Control-Expose-Headers': 'x-auth-token',
+          'x-auth-token': token
+          })
+          .status(201)
+          .json({
+            email: user.email,
+            _id: user._id
+          });
       });
     } else {
       console.log('fail to bcrypt a password!!!');
@@ -69,18 +78,15 @@ router.post('/login', (req, res) => {
     bcrypt.compare(req.body.password, user.password, (err, match) => {
       if (!err) {
         if(match) {
-          //set environment variables
-          const jsonSecurityKey = process.env.JWT_SECURITY_KEY;
-          const token = jwt.sign(
-            {subject: 'PROG3017',
-            assignment: 'Assignment 2 Phase 2',
-            student_name: 'Neo Lee',
-            exp: Math.floor(Date.now() / 1000) + (60 * 60)  //1 hour
-            },
-            jsonSecurityKey
-          );
+          //generator JWT
+          const token = createJWT();
 
-          return res.header({'x-auth-token': token}).status(200).send();
+          return res.header({
+            'Access-Control-Expose-Headers': 'x-auth-token',
+            'x-auth-token': token
+          })
+            .status(200)
+            .send();
         } else {
           return res.status(401).send();
         }
@@ -91,5 +97,20 @@ router.post('/login', (req, res) => {
     });
   })
 });
+
+function createJWT() {
+  //set environment variables
+  const jsonSecurityKey = process.env.JWT_SECURITY_KEY;
+  const token = jwt.sign(
+    {subject: 'PROG3017',
+      assignment: 'Assignment 2 and 3',
+      student_name: 'Neo Lee',
+      exp: Math.floor(Date.now() / 1000) + (60 * 60)  //1 hour
+    },
+    jsonSecurityKey
+  );
+
+  return token;
+}
 
 module.exports = router;
