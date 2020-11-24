@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Homework = require('../../models/modelHomeworks');
-const validationJWT = require('../../Middleware/validationJWT');
+const validationJWT = require('../../middleware/validationJWT');
 
 //Get all documents
 router.get('/', function (req, res) {
