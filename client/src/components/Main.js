@@ -14,7 +14,7 @@ class Main extends React.Component {
   componentDidMount() {
     //Make our initial api call for data
     Axios
-      .get('http://localhost:5000/api/homeworks')
+      .get(`${process.env.REACT_APP_API_URL}/homeworks`)
       .then(response => {
         console.log(response.data);
         this.setState({homeworks: response.data});
