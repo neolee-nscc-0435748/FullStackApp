@@ -22,32 +22,38 @@ class SignIn extends React.Component {
         response => {
           console.log(response);
 
-          //login was successful
-          console.log(response.headers['x-auth-token']);
+          if(response.status === 200)
+          {
+            //login was successful
+            console.log(response.headers['x-auth-token']);
 
-          //for dev purposes only.....
-          localStorage.setItem('SignInToken', response.headers['x-auth-token']);
-          //localStorage.getItem('token');
+            //for dev purposes only.....
+            localStorage.setItem('HomeworkToken', response.headers['x-auth-token']);
+            //localStorage.getItem('token');
 
-          //redirect to the homepage or some page that sent us here
-          console.log(this.props.history);
-          this.props.history.push('/');
+            //redirect to the homepage or some page that sent us here
+            console.log(this.props.history);
+            this.props.history.push('/');
 
 
-          //xss - cross site scripting
+            //xss - cross site scripting
 
-          //Where can we store this???
-          //as state - in our application -> secure / requires many logins
-          //local storage -> not that secure
-          //cookie(httpOnly) -> more secure than localStorage -> can still be accessed by hackers
+            //Where can we store this???
+            //as state - in our application -> secure / requires many logins
+            //local storage -> not that secure
+            //cookie(httpOnly) -> more secure than localStorage -> can still be accessed by hackers
 
-          //refresh tokens
+            //refresh tokens
 
-          //Auth0 - okta
-
+            //Auth0 - okta
+          }
         }
-    ).catch(
-      error => console.log(error.response)
+    ).catch((error) => {
+        console.log(error.response);
+
+        //login was failed
+        alert("Sign In was failed.\nPlease try it again");
+      }
     )
   }
 

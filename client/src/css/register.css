@@ -27,15 +27,7 @@
   border-bottom-left-radius: 0;
 }
 
-.form-register input[name="lastName"] {
-  margin-bottom: -1px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-register input[type="email"] {
+.form-register input[name="lastName"], input[type="email"] {
   margin-bottom: -1px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;

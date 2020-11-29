@@ -28,7 +28,7 @@ class Register extends React.Component {
         console.log(response.headers['x-auth-token']);
 
         //for dev purposes only.....
-        localStorage.setItem('RegisterToken', response.headers['x-auth-token']);
+        localStorage.setItem('HomeworkToken', response.headers['x-auth-token']);
         //localStorage.getItem('token');
 
         //redirect to the homepage or some page that sent us here
@@ -69,6 +69,7 @@ class Register extends React.Component {
       </form>
     );
   }
+
 }
 
 export default Register;

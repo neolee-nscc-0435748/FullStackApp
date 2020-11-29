@@ -3,7 +3,7 @@ import '../css/main.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Axios from "axios";
 import Card from "./Card";
-import NoMatch from "./NoMatch";
+import Register from "./Register";
 
 class Main extends React.Component {
 
@@ -42,6 +42,12 @@ class Main extends React.Component {
             </div>
           </div>
         </section>
+
+        <div className="row justify-content-center m-2">
+          <a href="create" className="btn btn-primary"  >
+            Create new context
+          </a>
+        </div>
 
         <div className="album py-5 bg-light">
           <div className="container">
