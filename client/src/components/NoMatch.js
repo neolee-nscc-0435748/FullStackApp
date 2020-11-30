@@ -6,9 +6,6 @@ const NoMatch = (props) => {
       <h1>
         No match for <code>{props.location.pathname}</code>
       </h1>
-      <h2>
-        { props.foo }
-      </h2>
     </>
   );
 }

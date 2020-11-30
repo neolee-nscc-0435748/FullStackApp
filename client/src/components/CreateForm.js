@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/createform.css';
-import Axios from "axios";
+import register from "../services/register";
+
 class CreateForm extends React.Component {
 
   state = {
@@ -20,71 +21,20 @@ class CreateForm extends React.Component {
     //submit data to the api
     console.log(this.state);
 
-    //get token
-    const homeworkToken = localStorage.getItem('HomeworkToken');
-    console.log(homeworkToken);
-
-    //make axios data
-    const createHeader = {
-      headers: {
-        "x-auth-token": homeworkToken,
-        "content-type": "application/json"
-      }
-    };
-
-    const createData = {
-      "subject": {
-        "teacher_name": {
-          "first": "Subject",
-          "last": "Teacher"
-        },
-        "title": "New subject title"
-      },
-      "semester": {
-        "year": 2020,
-        "name": "New Semester"
-      },
-      "school": {
-        "name": this.state.school.name,
-        "address": this.state.school.address,
-        "logo": this.state.school.logo
-      },
-      "title": this.state.title,
-      "score": this.state.score,
-      "due_date": this.state.due_date,
-      "submit": [
+    register.createHomework(this.state)
+      .then( data => {
+        if( data.status === 201)
         {
-          "seq_no": 1,
-          "title": "New Submit 1",
-          "text_content": "New Submit Text Content 1"
-        },
-        {
-          "seq_no": 2,
-          "title": "New Submit 2",
-          "text_content": "New Submit Text Content 2"
-        },
-        {
-          "seq_no": 3,
-          "title": "New Submit 3",
-          "text_content": "New Submit Text Content 3"
+          alert("Create a homework successfully!!!");
+          this.props.history.push("/");
         }
-      ],
-      "progress": 0
-    };
-
-    console.log(createData);
-
-    Axios.post(
-      'http://localhost:5000/api/homeworks',
-      createData,
-      createHeader
-    ).then(
-      response => {
-        console.log(response);
+        else
+        {
+          alert("Create a homework is failed!!!");
+        }
       }
-    ).catch(
-      error => console.log(error.response)
-    )
+    );
+
   }
 
   handleChange = (e) => {

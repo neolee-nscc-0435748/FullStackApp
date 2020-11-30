@@ -3,7 +3,6 @@ import '../css/main.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Axios from "axios";
 import Card from "./Card";
-import Register from "./Register";
 
 class Main extends React.Component {
 
@@ -27,6 +26,10 @@ class Main extends React.Component {
       });
   }
 
+  routeCreateForm = () => {
+    this.props.history.push("/create");
+  }
+
   render () {
     return (
       <div>
@@ -44,9 +47,9 @@ class Main extends React.Component {
         </section>
 
         <div className="row justify-content-center m-2">
-          <a href="create" className="btn btn-primary"  >
+          <button  className="btn btn-primary" onClick={this.routeCreateForm}>
             Create new context
-          </a>
+          </button>
         </div>
 
         <div className="album py-5 bg-light">
@@ -54,7 +57,7 @@ class Main extends React.Component {
             <div className="row">
               {
                 this.state.homeworks.map(homework => {
-                  return <Card homework = { homework } />
+                  return <div className="col-md-4" key={homework._id}> <Card homework = { homework } /> </div>
                 })
               }
             </div>

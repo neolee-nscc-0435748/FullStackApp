@@ -1,6 +1,8 @@
 import React from 'react';
 import '../css/signin.css';
 import Axios from "axios";
+import auth from "../services/auth";
+import register from "../services/register";
 
 class SignIn extends React.Component {
 
@@ -28,13 +30,13 @@ class SignIn extends React.Component {
             console.log(response.headers['x-auth-token']);
 
             //for dev purposes only.....
-            localStorage.setItem('HomeworkToken', response.headers['x-auth-token']);
+            register.setJWT(response.headers['x-auth-token']);
             //localStorage.getItem('token');
 
-            //redirect to the homepage or some page that sent us here
+            //redirect to the homepage or some page that sent us here with auth
             console.log(this.props.history);
-            this.props.history.push('/');
-
+            // this.props.history.push('/');
+            auth.login(() => this.props.history.push("/"));
 
             //xss - cross site scripting
 
@@ -46,6 +48,9 @@ class SignIn extends React.Component {
             //refresh tokens
 
             //Auth0 - okta
+
+            //auth redirect
+
           }
         }
     ).catch((error) => {

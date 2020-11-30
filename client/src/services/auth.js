@@ -16,10 +16,6 @@ class Auth {
   isAuthenticated() {
     return this.authenticated;
   }
-
-  register() {
-
-  }
 }
 
 export default new Auth()
