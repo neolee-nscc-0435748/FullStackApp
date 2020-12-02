@@ -1,8 +1,6 @@
 import React from 'react';
 import '../css/signin.css';
-import Axios from "axios";
-import auth from "../services/auth";
-import register from "../services/register";
+import authService from "../services/authService";
 
 class SignIn extends React.Component {
 
@@ -13,53 +11,17 @@ class SignIn extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    //submit data to the api
     console.log(this.state);
 
-    Axios.post(
-      'http://localhost:5000/api/users/login',
-      this.state
-    ).then(
-        response => {
-          console.log(response);
-
-          if(response.status === 200)
-          {
-            //login was successful
-            console.log(response.headers['x-auth-token']);
-
-            //for dev purposes only.....
-            register.setJWT(response.headers['x-auth-token']);
-            //localStorage.getItem('token');
-
-            //redirect to the homepage or some page that sent us here with auth
-            console.log(this.props.history);
-            // this.props.history.push('/');
-            auth.login(() => this.props.history.push("/"));
-
-            //xss - cross site scripting
-
-            //Where can we store this???
-            //as state - in our application -> secure / requires many logins
-            //local storage -> not that secure
-            //cookie(httpOnly) -> more secure than localStorage -> can still be accessed by hackers
-
-            //refresh tokens
-
-            //Auth0 - okta
-
-            //auth redirect
-
-          }
-        }
-    ).catch((error) => {
-        console.log(error.response);
-
-        //login was failed
-        alert("Sign In was failed.\nPlease try it again");
+    //sign in
+    authService.login(this.state, result => {
+      if(!result){
+        alert("Login is failed!\nPlease try it again");
+        return;
       }
-    )
+
+      this.props.history.push("/");
+    });
   }
 
   handleChange = (e) => {

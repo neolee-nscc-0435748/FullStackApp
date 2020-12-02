@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/register.css';
-import Axios from "axios";
+import authService from "../services/authService";
 
 class Register extends React.Component {
 
@@ -13,31 +13,17 @@ class Register extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    //submit data to the api
     console.log(this.state);
 
-    Axios.post(
-      'http://localhost:5000/api/users/register',
-      this.state
-    ).then(
-      response => {
-        console.log(response);
-
-        //register was successful
-        console.log(response.headers['x-auth-token']);
-
-        //for dev purposes only.....
-        localStorage.setItem('HomeworkToken', response.headers['x-auth-token']);
-        //localStorage.getItem('token');
-
-        //redirect to the homepage or some page that sent us here
-        //console.log(this.props.history);
-        //this.props.history.push('/');
+    //register new user
+    authService.register(this.state, result => {
+      if(!result){
+        alert("New user register is failed!");
+        return;
       }
-    ).catch(
-      error => console.log(error.response)
-    )
+
+      this.props.history.push("/");
+    });
   }
 
   handleChange = (e) => {

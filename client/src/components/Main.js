@@ -1,8 +1,8 @@
 import React from 'react';
 import '../css/main.css';
 import 'font-awesome/css/font-awesome.min.css';
-import Axios from "axios";
 import Card from "./Card";
+import restService from "../services/restService";
 
 class Main extends React.Component {
 
@@ -11,19 +11,15 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    //Make our initial api call for data
-    Axios
-      .get(`${process.env.REACT_APP_API_URL}/homeworks`)
-      .then(response => {
-        console.log(response.data);
-        this.setState({homeworks: response.data});
-      })
-      .catch(error => {
-        console.log(error);
-      })
-      .then(() => {
+    //Get all homework data
+    restService.getHomeworks( (data, error) => {
+      if(error){
+        alert("Get all homeworks failed!");
+        return;
+      }
 
-      });
+      this.setState({homeworks: data});
+    });
   }
 
   routeCreateForm = () => {
@@ -57,7 +53,11 @@ class Main extends React.Component {
             <div className="row">
               {
                 this.state.homeworks.map(homework => {
-                  return <div className="col-md-4" key={homework._id}> <Card homework = { homework } /> </div>
+                  return (
+                    <div className="col-md-4" key={homework._id}>
+                      <Card homework = { homework } />
+                    </div>
+                  )
                 })
               }
             </div>

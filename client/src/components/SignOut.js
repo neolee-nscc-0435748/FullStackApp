@@ -1,10 +1,8 @@
-import auth from "../services/auth";
-import register from "../services/register";
+import authService from "../services/authService";
 
 const SignOut = (props) => {
   const signOutProcess = () => {
-    register.removeJWT();
-    auth.logout(() => props.history.push("/"));
+    authService.logout(() => props.history.push("/"));
   }
 
   return (

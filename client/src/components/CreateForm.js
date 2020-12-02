@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/createform.css';
-import register from "../services/register";
+import restService from "../services/restService";
 
 class CreateForm extends React.Component {
 
@@ -21,20 +21,15 @@ class CreateForm extends React.Component {
     //submit data to the api
     console.log(this.state);
 
-    register.createHomework(this.state)
-      .then( data => {
-        if( data.status === 201)
-        {
-          alert("Create a homework successfully!!!");
-          this.props.history.push("/");
-        }
-        else
-        {
-          alert("Create a homework is failed!!!");
-        }
+    restService.createHomework(this.state, result => {
+      if(!result) {
+        alert("Create a homework is failed!!!");
+        return;
       }
-    );
 
+      alert("Create a homework successfully!!!");
+      this.props.history.push("/");
+    });
   }
 
   handleChange = (e) => {
