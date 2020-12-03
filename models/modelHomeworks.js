@@ -105,7 +105,7 @@ const homeworkSchema = new mongoose.Schema({
     logo: {
       type: String,
       minlength: 3,
-      maxlength: 100,
+      maxlength: 200,
       required: true
     }
   }

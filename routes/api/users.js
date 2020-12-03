@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
         }
 
         //generator JWT
-        const token = createJWT();
+        const token = createJWT(req.body.email);
 
         return res
           .header({
@@ -79,7 +79,7 @@ router.post('/login', (req, res) => {
       if (!err) {
         if(match) {
           //generator JWT
-          const token = createJWT();
+          const token = createJWT(req.body.email);
 
           return res.header({
             'Access-Control-Expose-Headers': 'x-auth-token',
@@ -98,13 +98,14 @@ router.post('/login', (req, res) => {
   })
 });
 
-function createJWT() {
+function createJWT(email) {
   //set environment variables
   const jsonSecurityKey = process.env.JWT_SECURITY_KEY;
   const token = jwt.sign(
     {subject: 'PROG3017',
       assignment: 'Assignment 2 and 3',
       student_name: 'Neo Lee',
+      user_email: email,
       exp: Math.floor(Date.now() / 1000) + (60 * 60)  //1 hour
     },
     jsonSecurityKey

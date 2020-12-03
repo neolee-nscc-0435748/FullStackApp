@@ -71,8 +71,17 @@ class RestService {
       });
   }
 
-  getHomework(id) {
-
+  getHomework(id, cb) {
+    Axios
+      .get(`${this.baseURL}/homeworks/${id}`)
+      .then(response => {
+        // console.log(response.data);
+        cb(response.data, null);
+      })
+      .catch(error => {
+        console.log(error.response);
+        cb(null, error);
+      });
   }
 
   createHomework(data, cb) {
@@ -143,12 +152,94 @@ class RestService {
     );
   }
 
-  updateHomework(data) {
+  updateHomework(id, data, cb) {
+    //make axios data
+    const createHeader = {
+      headers: {
+        "x-auth-token": this.getToken(),
+        "content-type": "application/json"
+      }
+    };
 
+    const createData = {
+      "subject": {
+        "teacher_name": {
+          "first": "Subject",
+          "last": "Teacher"
+        },
+        "title": "New subject title"
+      },
+      "semester": {
+        "year": 2020,
+        "name": "New Semester"
+      },
+      "school": {
+        "name": data.school.name,
+        "address": data.school.address,
+        "logo": data.school.logo
+      },
+      "title": data.title,
+      "score": data.score,
+      "due_date": data.due_date,
+      "submit": [
+        {
+          "seq_no": 1,
+          "title": "New Submit 1",
+          "text_content": "New Submit Text Content 1"
+        },
+        {
+          "seq_no": 2,
+          "title": "New Submit 2",
+          "text_content": "New Submit Text Content 2"
+        },
+        {
+          "seq_no": 3,
+          "title": "New Submit 3",
+          "text_content": "New Submit Text Content 3"
+        }
+      ],
+      "progress": 0
+    };
+    // console.log(createData);
+
+    //call post API
+    return Axios.put(
+      `${this.baseURL}/homeworks/${id}`,
+      createData,
+      createHeader
+    ).then(
+      response => {
+        // console.log(response);
+        cb(true);
+      }
+    ).catch(
+      error => {
+        console.log(error.response);
+        cb(false);
+      }
+    );
   }
 
-  deleteHomework(id) {
+  deleteHomework(id, cb) {
+    //make axios data
+    const createHeader = {
+      headers: {
+        "x-auth-token": this.getToken(),
+        "content-type": "application/json"
+      }
+    };
 
+    Axios
+      .delete(`${this.baseURL}/homeworks/${id}`,
+        createHeader )
+      .then(response => {
+        // console.log(response.data);
+        cb(true);
+      })
+      .catch(error => {
+        console.log(error.response);
+        cb(false);
+      });
   }
 
 }

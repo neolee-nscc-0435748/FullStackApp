@@ -17,7 +17,7 @@ const homeworkSchema = Joi.object({ //build a schema for validations
   school: {
     name: Joi.string().min(3).max(50).required(),
     address: Joi.string().min(3).max(100).required(),
-    logo: Joi.string().min(3).max(100).required(),
+    logo: Joi.string().min(3).max(200).required(),
   },
   title:Joi.string().min(3).max(50).required(),
   score: Joi.number().integer().min(0).max(100).required(),

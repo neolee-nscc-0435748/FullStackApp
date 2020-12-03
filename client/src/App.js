@@ -5,6 +5,8 @@ import SignIn from './components/SignIn';
 import SignOut from './components/SignOut';
 import Register from "./components/Register";
 import CreateForm from "./components/CreateForm";
+import EditForm from "./components/EditForm";
+import DeleteForm from "./components/DeleteForm";
 import Footer from './components/Footer';
 import NoMatch from "./components/NoMatch";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -28,6 +30,8 @@ const App = () => {
               <Route exact path='/signin' render = { props => <SignIn { ...props } />} />
               <Route exact path='/' render = { props => <Main { ...props } />} />
               <ProtectedRoute exact path='/create' component = { CreateForm } />
+              <ProtectedRoute exact path='/edit' component = { EditForm } />
+              <ProtectedRoute exact path='/delete' component = { DeleteForm } />
               <Route exact path='/signout' render = { props => <SignOut { ...props } />} />
               <Route path="*" render = { props => <NoMatch { ...props } />} />
             </Switch>

@@ -1,4 +1,5 @@
 import restService from "./restService";
+import jwt_decode from "jwt-decode";
 
 class AuthService {
   login(credentials, cb) {
@@ -20,6 +21,17 @@ class AuthService {
     restService.createUser(data, (result) => {
       cb(result);
     });
+  }
+
+  getUserEmail() {
+    if(this.isAuthenticated()){
+      const decodedToken = jwt_decode(restService.getToken());
+      console.log(decodedToken);
+
+      return decodedToken.user_email;
+    }
+
+    return null;
   }
 }
 

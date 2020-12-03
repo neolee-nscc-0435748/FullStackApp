@@ -55,7 +55,7 @@ class Main extends React.Component {
                 this.state.homeworks.map(homework => {
                   return (
                     <div className="col-md-4" key={homework._id}>
-                      <Card homework = { homework } />
+                      <Card props = {this.props} homework = { homework } />
                     </div>
                   )
                 })

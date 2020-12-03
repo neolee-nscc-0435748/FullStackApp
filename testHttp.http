@@ -4,13 +4,13 @@
 GET http://localhost:5000/api/homeworks
 
 ### Get one document by Id
-GET http://localhost:3000/api/homeworks/5f6ff3d34566190b10831348
+GET http://localhost:5000/api/homeworks/5f6ff3d34566190b10831348
 
 ### Get one document by Id (created by me)
-GET http://localhost:3000/api/homeworks/5f8b8f7d71cc4e23e4f82c64
+GET http://localhost:5000/api/homeworks/5f8b8f7d71cc4e23e4f82c64
 
 ### Create new document
-POST http://localhost:3000/api/homeworks
+POST http://localhost:5000/api/homeworks
 Content-Type: application/json
 
 {
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ### Update an existing document by Id
-PUT http://localhost:3000/api/homeworks/5f8b8f7d71cc4e23e4f82c64
+PUT http://localhost:5000/api/homeworks/5f8b8f7d71cc4e23e4f82c64
 Content-Type: application/json
 
 {
@@ -98,7 +98,7 @@ Content-Type: application/json
 }
 
 ### Delete an existing document by Id
-DELETE http://localhost:3000/api/homeworks/5f8bc84d0fca612af49d278e
+DELETE http://localhost:5000/api/homeworks/5f8bc84d0fca612af49d278e
 
 ########################################################################################################################
 ### For users
@@ -134,7 +134,7 @@ Content-Type: application/json
 }
 
 ### Create new document
-POST http://localhost:3000/api/homeworks
+POST http://localhost:5000/api/homeworks
 Content-Type: application/json
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciLCJhc3NpZ25tZW50IjoiQXNzaWdubWVudCAyIFBoYXNlIDIiLCJzdHVkZW50X25hbWUiOiJOZW8gTGVlIiwiZXhwIjoxNjAzMjI0NTg1LCJpYXQiOjE2MDMyMjA5ODV9.2QnehAmPqiEWt039Bn9hkJ7S2zh-H-chrF2pQ9NbDDo
 
@@ -180,7 +180,7 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciL
 }
 
 ### Update an existing document by Id
-PUT http://localhost:3000/api/homeworks/5f8f3622b7241047d066eaf0
+PUT http://localhost:5000/api/homeworks/5f8f3622b7241047d066eaf0
 Content-Type: application/json
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciLCJhc3NpZ25tZW50IjoiQXNzaWdubWVudCAyIFBoYXNlIDIiLCJzdHVkZW50X25hbWUiOiJOZW8gTGVlIiwiZXhwIjoxNjAzMjI0NTg1LCJpYXQiOjE2MDMyMjA5ODV9.2QnehAmPqiEWt039Bn9hkJ7S2zh-H-chrF2pQ9NbDDo
 
@@ -227,5 +227,5 @@ x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciL
 }
 
 ### Delete an existing document by Id
-DELETE http://localhost:3000/api/homeworks/5f8f3622b7241047d066eaf0
+DELETE http://localhost:5000/api/homeworks/5f8f3622b7241047d066eaf0
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoiUFJPRzMwMTciLCJhc3NpZ25tZW50IjoiQXNzaWdubWVudCAyIFBoYXNlIDIiLCJzdHVkZW50X25hbWUiOiJOZW8gTGVlIiwiZXhwIjoxNjAzMjI0NTg1LCJpYXQiOjE2MDMyMjA5ODV9.2QnehAmPqiEWt039Bn9hkJ7S2zh-H-chrF2pQ9NbDDo
