@@ -4,13 +4,13 @@ import authService from "../services/authService";
 
 const NavBar = (props) => {
     const userMenu = () => {
-      if(props.userEmail)
+      if(props.auth && authService.isAuthenticated())
       {
         return (
           <ul className="navbar-nav ml-auto">
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="/#" id="dropdown07" data-toggle="dropdown"
-                 aria-haspopup="true" aria-expanded="false">Welcome {props.userEmail}</a>
+                 aria-haspopup="true" aria-expanded="false">Welcome {authService.getUserEmail()}</a>
               <div className="dropdown-menu" aria-labelledby="dropdown07">
                 <a className="dropdown-item" href="/signout">Logout</a>
               </div>

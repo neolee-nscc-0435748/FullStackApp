@@ -7,10 +7,12 @@ import { schemaRegister } from "../validations/schemas";
 class Register extends React.Component {
 
   state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+    registerInfo: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    },
   };
 
   handleSubmit = (e) => {
@@ -18,14 +20,14 @@ class Register extends React.Component {
     console.log(this.state);
 
     //validation check
-    const valResult = validation.validate(schemaRegister, this.state);
+    const valResult = validation.validate(schemaRegister, this.state.registerInfo);
     if(valResult) {
       this.setState(valResult);
       return;
     }
 
     //register new user
-    authService.register(this.state, result => {
+    authService.register(this.state.registerInfo, result => {
       if(!result){
         alert("New user register is failed!");
         return;
@@ -38,8 +40,10 @@ class Register extends React.Component {
   handleChange = (e) => {
     //updating our state with the change in form field
     const { name, value } = e.target; //destructuring
+    const registerInfo = { ...this.state.registerInfo } ;
+    registerInfo[name] = value;
 
-    this.setState({ [name]: value });
+    this.setState({ registerInfo });
   }
 
   render()

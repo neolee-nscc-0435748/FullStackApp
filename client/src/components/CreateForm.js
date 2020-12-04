@@ -7,13 +7,15 @@ import { schemaHomework } from "../validations/schemas";
 class CreateForm extends React.Component {
 
   state = {
-    title: '',
-    score: '',
-    due_date: '',
-    school: {
-      name: '',
-      address: '',
-      logo: '',
+    homework: {
+      title: '',
+      score: '',
+      due_date: '',
+      school: {
+        name: '',
+        address: '',
+        logo: '',
+      },
     },
   };
 
@@ -22,19 +24,19 @@ class CreateForm extends React.Component {
     console.log(this.state);
 
     //validation check
-    const valResult = validation.validate(schemaHomework, this.state);
+    const valResult = validation.validate(schemaHomework, this.state.homework);
     if(valResult) {
       this.setState(valResult);
       return;
     }
 
-    restService.createHomework(this.state, result => {
+    restService.createHomework(this.state.homework, result => {
       if(!result) {
         alert("Create a homework is failed!!!");
         return;
       }
 
-      alert("Create a homework successfully!!!");
+      // alert("Create a homework successfully!!!");
       this.props.history.push("/");
     });
   }
@@ -42,25 +44,15 @@ class CreateForm extends React.Component {
   handleChange = (e) => {
     //updating our state with the change in form field
     const { name, value } = e.target; //destructuring
+    const homework = { ...this.state.homework } ;
 
-    if( name === "title" || name === "score" || name === "due_date" )
-    {
-      this.setState({
-          [name]: value
-        }
-      );
+    if( name === "title" || name === "score" || name === "due_date" ){
+      homework[name] = value;
+    } else {
+      homework.school[name] = value;
     }
-    else
-    {
-      this.setState(prevState => (
-        {
-          school: {
-          ...prevState.school,
-              [name]: value
-          }
-        }
-      ));
-    }
+
+    this.setState({ homework } );
   }
 
   render()

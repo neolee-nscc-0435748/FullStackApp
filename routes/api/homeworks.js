@@ -11,6 +11,11 @@ router.get('/', function (req, res) {
   Homework.find({}, (err, homeworks) => {
     if (err) return res.status(404).send('Error');
 
+    //filter by search word
+    if(req.query.searchWord !== ""){
+      homeworks = homeworks.filter(homework => homework.title.indexOf(req.query.searchWord) !== -1 );
+    }
+
     return res.status(200).send(homeworks);
   });
 });

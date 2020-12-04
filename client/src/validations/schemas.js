@@ -4,7 +4,6 @@ import Joi from "joi-browser";
 const schemaSignIn = Joi.object().keys({
   email: Joi.string().email({ minDomainAtoms: 2}).required(),
   password: Joi.string().min(5).max(255).required(),
-  error: Joi.object().allow(null),
 });
 
 const schemaRegister = Joi.object().keys({
@@ -12,7 +11,6 @@ const schemaRegister = Joi.object().keys({
   lastName: Joi.string().min(3).max(30).required(),
   email: Joi.string().email({ minDomainAtoms: 2}).required(),
   password: Joi.string().min(5).max(255).required(),
-  error: Joi.object().allow(null),
 });
 
 const schemaHomework = Joi.object().keys({
@@ -24,7 +22,6 @@ const schemaHomework = Joi.object().keys({
     address: Joi.string().min(3).max(100).required(),
     logo: Joi.string().min(3).max(200).required(),
   }),
-  error: Joi.object().allow(null),
 });
 
 export { schemaSignIn, schemaRegister, schemaHomework };

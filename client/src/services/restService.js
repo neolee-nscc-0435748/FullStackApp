@@ -27,7 +27,7 @@ class RestService {
     ).then(
       response => {
         //login was successful
-        console.log(response);
+        //console.log(response);
         this.setToken(response.headers['x-auth-token']);  //for dev purposes only.....(localstorage is not safe in security reason
         cb(true);
       }
@@ -46,7 +46,7 @@ class RestService {
     ).then(
       response => {
         //register was successful
-        console.log(response);
+        //console.log(response);
         this.setToken(response.headers['x-auth-token']);  //for dev purposes only.....(localstorage is not safe in security reason
         cb(true);
       }
@@ -58,15 +58,21 @@ class RestService {
     )
   }
 
-  getHomeworks(cb) {
+  getHomeworks(searchWord, cb) {
+    const axiosParams = {
+      params: {
+        searchWord: searchWord,
+      },
+    };
+
     Axios
-      .get(`${this.baseURL}/homeworks`)
+      .get(`${this.baseURL}/homeworks`, axiosParams)
       .then(response => {
         // console.log(response.data);
         cb(response.data, null);
       })
       .catch(error => {
-        console.log(error.response);
+        console.log(error);
         cb(null, error);
       });
   }

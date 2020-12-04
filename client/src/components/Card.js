@@ -1,22 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import restService from "../services/restService";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default function Card (props) {
   const { homework } = props;
   // console.log(homework);
 
-  const routeEditForm = () => {
-    return (
-      <div>
-        <Link to = {{
-          pathname: '/edit',
-          aboutProps: {
-            _id: homework._id
+  const deleteProcess = () => {
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete this homework?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            restService.deleteHomework(props.location.aboutProps._id, result => {
+              if (!result) {
+                alert("Delete a homework is failed!!!");
+              } else {
+                alert("Delete a homework successfully!!!");
+              }
+              props.history.goBack();
+            });
           }
-        }}>
-        </Link>
-      </div>
-    );
+        },
+        {
+          label: 'No',
+          onClick: () => props.history.goBack()
+        }
+      ]
+    });
   }
 
   return (

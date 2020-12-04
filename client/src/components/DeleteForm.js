@@ -14,9 +14,10 @@ const DeleteForm = (props) => {
             restService.deleteHomework(props.location.aboutProps._id, result => {
               if (!result) {
                 alert("Delete a homework is failed!!!");
-              } else {
-                alert("Delete a homework successfully!!!");
               }
+              // else {
+              //   alert("Delete a homework successfully!!!");
+              // }
               props.history.goBack();
             });
           }

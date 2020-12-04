@@ -8,8 +8,10 @@ import { schemaSignIn } from "../validations/schemas";
 class SignIn extends React.Component {
 
   state = {
-    email: '',
-    password: '',
+    userInfo: {
+      email: '',
+      password: '',
+    },
   };
 
   handleSubmit = (e) => {
@@ -17,19 +19,20 @@ class SignIn extends React.Component {
     console.log(this.state);
 
     //validation check
-    const valResult = validation.validate(schemaSignIn, this.state);
+    const valResult = validation.validate(schemaSignIn, this.state.userInfo);
     if(valResult) {
       this.setState(valResult);
       return;
     }
 
     //sign in
-    authService.login(this.state, result => {
+    authService.login(this.state.userInfo, result => {
       if(!result){
         alert("Login is failed!\nPlease try it again");
         return;
       }
 
+      this.props.update();
       this.props.history.push("/");
     });
   }
@@ -37,8 +40,10 @@ class SignIn extends React.Component {
   handleChange = (e) => {
     //updating our state with the change in form field
     const { type, value } = e.target; //destructuring
+    const userInfo = { ...this.state.userInfo } ;
+    userInfo[type] = value;
 
-    this.setState({ [type]: value });
+    this.setState({ userInfo });
   }
 
   render()
@@ -48,11 +53,11 @@ class SignIn extends React.Component {
             <h1 className="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
 
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
-            <input onChange={ this.handleChange } type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
+            <input onChange={ this.handleChange } name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
             <span style={{color: "red"}}>{ validation.getErrorMsg(this.state.error, "email") }</span>
 
             <label htmlFor="inputPassword" className="sr-only">Password</label>
-            <input onChange={ this.handleChange } type="password" id="inputPassword" className="form-control" placeholder="Password" required />
+            <input onChange={ this.handleChange } name="password" type="password" id="inputPassword" className="form-control" placeholder="Password" required />
             <span style={{color: "red"}}>{ validation.getErrorMsg(this.state.error, "password") }</span>
 
             <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

@@ -9,7 +9,7 @@ class AuthService {
   }
 
   logout(cb) {
-      restService.removeToken();
+    restService.removeToken();
     cb();
   }
 

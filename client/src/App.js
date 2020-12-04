@@ -10,6 +10,7 @@ import DeleteForm from "./components/DeleteForm";
 import Footer from './components/Footer';
 import NoMatch from "./components/NoMatch";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import authService from "./services/authService";
 
 import {
   BrowserRouter as Router,
@@ -19,15 +20,29 @@ import {
 
 import './css/app.css';
 
-const App = () => {
-  return (
-    <React.Fragment>
-        <NavBar />
+class App extends React.Component {
+
+  state = {
+    auth: false,
+  };
+
+  checkAuth = () => {
+    this.setState({ auth: authService.isAuthenticated() });
+  }
+
+  updateNavbar = () => {
+    this.checkAuth();
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar auth={this.state.auth} />
         <div id="main-content">
           <Router>
             <Switch>
               <Route exact path='/register' render = { props => <Register { ...props } />} />
-              <Route exact path='/signin' render = { props => <SignIn { ...props } />} />
+              <Route exact path='/signin' render = { props => <SignIn { ...props}  update={ this.updateNavbar } />} />
               <Route exact path='/' render = { props => <Main { ...props } />} />
               <ProtectedRoute exact path='/create' component = { CreateForm } />
               <ProtectedRoute exact path='/edit' component = { EditForm } />
@@ -38,8 +53,10 @@ const App = () => {
           </Router>
         </div>
         <Footer />
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
+
 }
 
 export default App;

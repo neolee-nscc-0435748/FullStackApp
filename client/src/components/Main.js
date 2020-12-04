@@ -11,8 +11,14 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    this.searchHomeworks();
+  }
+
+  searchHomeworks = () => {
+    let searchWord = document.getElementById("search").value;
+
     //Get all homework data
-    restService.getHomeworks( (data, error) => {
+    restService.getHomeworks( searchWord, (data, error) => {
       if(error){
         alert("Get all homeworks failed!");
         return;
@@ -32,9 +38,9 @@ class Main extends React.Component {
         <section className="jumbotron text-center">
           <div className="container">
             <div className="input-group">
-              <input type="text" className="form-control" placeholder="Search this site"/>
+              <input id="search" type="text" className="form-control" placeholder="Search this site"/>
               <div className="input-group-append">
-                <button className="btn btn-secondary" type="button">
+                <button className="btn btn-secondary" type="button" onClick={this.searchHomeworks}>
                   <i className="fa fa-search"></i>
                 </button>
               </div>
