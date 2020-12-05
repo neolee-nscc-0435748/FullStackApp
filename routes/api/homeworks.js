@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
     if (err) return res.status(404).send('Error');
 
     //filter by search word
-    if(req.query.searchWord !== ""){
+    if(!req.query.searchWord && req.query.searchWord !== ""){
       homeworks = homeworks.filter(homework => homework.title.indexOf(req.query.searchWord) !== -1 );
     }
 
