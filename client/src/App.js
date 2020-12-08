@@ -37,9 +37,9 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar auth={this.state.auth} />
         <div id="main-content">
           <Router>
+            <NavBar auth={this.state.auth} />
             <Switch>
               <Route exact path='/register' render = { props => <Register { ...props } />} />
               <Route exact path='/signin' render = { props => <SignIn { ...props}  update={ this.updateNavbar } />} />

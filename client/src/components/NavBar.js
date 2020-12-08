@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/navbar.css';
 import authService from "../services/authService";
+import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
     const userMenu = () => {
@@ -12,7 +13,7 @@ const NavBar = (props) => {
               <a className="nav-link dropdown-toggle" href="/#" id="dropdown07" data-toggle="dropdown"
                  aria-haspopup="true" aria-expanded="false">Welcome {authService.getUserEmail()}</a>
               <div className="dropdown-menu" aria-labelledby="dropdown07">
-                <a className="dropdown-item" href="/signout">Logout</a>
+                <Link className="dropdown-item" to="/signout">Logout</Link>
               </div>
             </li>
           </ul>
@@ -21,10 +22,10 @@ const NavBar = (props) => {
         return (
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <a className="nav-link" href="/signin">Login</a>
+              <Link className="nav-link" to="/signin">Login</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/register">Register</a>
+              <Link className="nav-link" to="/register">Register</Link>
             </li>
           </ul>
         )
