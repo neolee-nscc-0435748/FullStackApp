@@ -2,7 +2,10 @@ import authService from "../services/authService";
 
 const SignOut = (props) => {
   const signOutProcess = () => {
-    authService.logout(() => props.history.push("/"));
+    authService.logout(() => {
+      props.update();
+      props.history.push("/")
+    });
   }
 
   return (

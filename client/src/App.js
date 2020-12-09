@@ -41,13 +41,13 @@ class App extends React.Component {
           <Router>
             <NavBar auth={this.state.auth} />
             <Switch>
-              <Route exact path='/register' render = { props => <Register { ...props } />} />
+              <Route exact path='/register' render = { props => <Register { ...props }  update={ this.updateNavbar } />} />
               <Route exact path='/signin' render = { props => <SignIn { ...props}  update={ this.updateNavbar } />} />
               <Route exact path='/' render = { props => <Main { ...props } />} />
               <ProtectedRoute exact path='/create' component = { CreateForm } />
               <ProtectedRoute exact path='/edit' component = { EditForm } />
               <ProtectedRoute exact path='/delete' component = { DeleteForm } />
-              <Route exact path='/signout' render = { props => <SignOut { ...props } />} />
+              <Route exact path='/signout' render = { props => <SignOut { ...props } update={ this.updateNavbar } />} />
               <Route path="*" render = { props => <NoMatch { ...props } />} />
             </Switch>
           </Router>

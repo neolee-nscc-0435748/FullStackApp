@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
     const userMenu = () => {
-      if(props.auth && authService.isAuthenticated())
+      if(authService.isAuthenticated())
       {
         return (
           <ul className="navbar-nav ml-auto">

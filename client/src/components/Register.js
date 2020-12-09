@@ -33,6 +33,7 @@ class Register extends React.Component {
         return;
       }
 
+      this.props.update();
       this.props.history.push("/");
     });
   }
