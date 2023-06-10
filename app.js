@@ -44,11 +44,11 @@ app.use('/api', apiRouter);
 
 //production mode needs to redirection
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
-if(process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.jon(__dirname + '/client/build/index.html'));
-  });
-}
+// if(process.env.NODE_ENV === 'production') {
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.jon(__dirname + '/client/build/index.html'));
+//   });
+// }
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
