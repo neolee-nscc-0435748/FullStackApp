@@ -37,8 +37,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));  //First looking for the default url: for local
-//app.use(express.static(path.join(__dirname, 'client/build')));  //First looking for the default url: for heroku
-app.use(express.static(path.join(__dirname, 'client/public')));  //First looking for the default url: for coolify
+app.use(express.static(path.join(__dirname, 'client/build')));  //First looking for the default url: for heroku
+//app.use(express.static(path.join(__dirname, 'client/public')));  //First looking for the default url: for coolify
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
